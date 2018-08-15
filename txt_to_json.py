@@ -23,7 +23,7 @@ trim = lambda s: s.strip()
 with open(input_file) as file:
     file_contents = file.read()
     
-    json_results = json.dumps(list(map(trim,pattern.findall(file_contents))))
+    json_results = json.dumps({'result':list(map(trim,pattern.findall(file_contents)))})
     
     out_f = open(out_file, "w+")
     out_f.write(json_results)
