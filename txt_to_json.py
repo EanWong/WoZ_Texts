@@ -20,11 +20,13 @@ pattern = re.compile(sentence_RE)
 
 #remove whitespace, new lines
 trim = lambda s: s.strip()
+breakdown = lambda s: s.split()
 with open(input_file) as file:
     file_contents = file.read()
     file_contents = file_contents.replace('\n', ' ').replace('\r', '')    
-    results = list(map(trim,pattern.findall(file_contents)))
-    json_results = json.dumps({'result':results})
+    sentences = list(map(trim,pattern.findall(file_contents)))
+    sentence_breakdowns = list(map(breakdown,sentences))
+    json_results = json.dumps({'sentences':sentences, 'sentence_breakdowns':sentence_breakdowns})
     
     out_f = open(out_file, "w+")
     out_f.write(json_results)
